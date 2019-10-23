@@ -1,0 +1,22 @@
+
+#Decyption – Caesar Cipher
+import ast
+import string
+#take input on your own
+in_list = ast.literal_eval(input())
+password = in_list[0].strip()
+step = in_list[1]
+
+#start writing your code from here
+alpha = string.ascii_lowercase
+alpha_upper = string.ascii_uppercase
+decoded=''
+for letter in password:
+    if letter.islower():
+        real_pos= (alpha.index(letter) - step) % 26
+        decoded += alpha[real_pos]
+    else:
+        real_pos= (alpha_upper.index(letter) - step) % 26
+        decoded += alpha_upper[real_pos]
+        
+print(decoded)
