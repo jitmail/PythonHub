@@ -46,3 +46,47 @@ if isstring:
 else:
     print('INT')
 
+
+#Printing the first of smallest key:value pair from a dictionary
+
+import ast
+#take input here
+input_dic = ast.literal_eval(input()) 
+
+len_dic = len(input_dic)
+
+min_key= min(input_dic, key=input_dic.get)
+           
+print(str(min_key)+': '+str(input_dic[min_key]))
+
+#Last index of a value in a list
+#Use listL.index(Value) in combination with reverse of the list  listL[::-1] to find out the last index. 
+Here, this would be len(listL) - 1 - listL[::-1].index(value)
+
+#Flatten a Dictionary
+import ast,sys
+input_str = sys.stdin.read()
+input_dict = dict(ast.literal_eval(input_str))
+print(input_dict.values())
+new_dict={}
+def flatten_dict(dd, separator='_', prefix=''):
+    #complete this function
+    if type(dd) is not dict:
+        return new_dict
+    for k,v in dd.items():
+        if type(v) == dict:
+            new_dict.update(flatten_dict(v, separator, k))
+        else:
+            if prefix !='':
+                new_dict[prefix + separator + k]=v
+            else:
+                new_dict[k]=v
+            
+    return new_dict
+out1=list(flatten_dict(input_dict).keys())
+out2=list(flatten_dict(input_dict).values())
+out1.sort()
+out2.sort()
+print(out1)
+print(out2)
+
