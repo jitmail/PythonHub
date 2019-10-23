@@ -1,0 +1,48 @@
+#Python Pandas
+#Adding values of two dataframes with same columns but different row values.
+#Use Group by on the differing value column and perform add
+ipl_all=ipl17.groupby('Team').sum().add(ipl18.groupby('Team').sum(), fill_value=0).reset_index()
+#Similar to Group by Having in Pandas
+new_ipl_all = ipl_all.loc[ipl_all['Points'] >25]  #<-- filtering for all records with more than 25 points
+new_ipl_all['WinRatio'] = new_ipl_all['Won']/ new_ipl_all['Matches'] #<-- new column
+print(new_ipl_all.loc[new_ipl_all['WinRatio']==new_ipl_all['WinRatio'].max()]) #<-- print highest new col
+
+#Useful snippet to find if a given number is an amstrong number or not.
+n=int(input())
+digits=list(map(int,str(n)))
+num=sum(list(map(lambda x:x**3,digits)))
+print(num==n)
+
+#List comprehension used on a string
+vow_in_s = [letter for letter in s if letter.lower() in vowels]
+Find the bigger string out of two
+min_string=min(s1,s2,key=len)
+
+#Checking for Integer from Input
+#inut has been taken for you
+in_str=input()
+
+#find out if in_str is integer or not
+#first we strip all spaces in start and end of the string
+in_str=in_str.strip()
+isstring=0 #we will make this variable as 1 if it fails to be an integer at any point 
+nums='0123456789'
+#lets break it down in three possibilites: in_str is a positive integer
+#or a negative integer or a string
+
+#incase of positive or negative integer all characters other
+#than first character (0th index) must be in nums
+
+for i in in_str[1:]:
+    if i not in nums:
+        isstring=1
+
+#now we check first character (zeroth index)
+if in_str[0] not in nums+'-': 
+    isstring=1 #it will be string if first element is not - or 0123456789
+
+if isstring:
+    print('STR')
+else:
+    print('INT')
+
