@@ -1,0 +1,39 @@
+# Reading the input
+import ast 
+s_list = ast.literal_eval(input())
+s_num = int(input())
+
+# Write your code here
+def binarySearch(s_list, l, r, s_num):
+    if l<=r:
+        #find the middle
+        mid = (l+r)//2
+        #print(mid)
+        #return middle if element is middle
+        if s_list[mid] == s_num:
+            return mid
+        #If element is smaller than mid, then it can only be in the left sub list
+        #since the list is sorted
+        elif s_list[mid] > s_num:
+            return binarySearch(s_list,l,mid-1,s_num)
+        #Else the element can only be in the right sub list
+        else:
+            return binarySearch(s_list,mid+1,r,s_num)
+    #else element is not in the list
+    else:
+        return -1
+
+listLen = len(s_list)-1
+closestNum2=0
+def findClosest(s_list,s_num):
+    for i in range(listLen):
+        #print('i',i,'listLen',listLen,'s_num - s_list[i]',s_num - s_list[i])
+        closestNum2 = binarySearch(s_list,i, listLen ,s_num - s_list[i]) #<----change this to s_num+s_list[i] to find the difference
+        if closestNum2 >= 0 :
+            if i != closestNum2:
+                return 'Yes'
+                break
+        
+    return 'No'
+result= findClosest(s_list, s_num)
+print(result)
