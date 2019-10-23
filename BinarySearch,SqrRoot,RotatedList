@@ -1,0 +1,87 @@
+
+Binary Search Algorithm (split search space by 2)
+def binary_search(data, value):
+    n = len(data)
+    left = 0
+    right = n – 1
+    while left <= right:
+        middle = (left + right) / 2
+        if value < data[middle]:
+            right = middle - 1
+        elif value > data[middle]:
+            left = middle + 1
+        else:
+            return middleraise ValueError('Value is not in the list')if __name__ == '__main__':
+    data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    print(binary_search(data, 8))
+
+Split search space by 3 (same complexity)
+#take input here
+import ast
+sorted_list = ast.literal_eval(input())
+key=int(input())
+
+#find the index of key in list
+def t_search(sorted_list,key):
+l_index = 0
+r_index = len(sorted_list)-1
+while (l_index<=r_index):
+mid_1 = l_index+(-l_index+r_index)//3
+mid_2 = l_index+2*(-l_index+r_index)//3
+if sorted_list[mid_1]==key:
+return mid_1
+elif sorted_list[mid_2]==key:
+return mid_2
+elif sorted_list[mid_1]>key:
+r_index = mid_1-1
+elif sorted_list[mid_2]>key:
+l_index = mid_1
+r_index = mid_2-1
+else:
+l_index = mid_2+1
+return -1
+
+print(t_search(sorted_list,key))
+
+
+Square root
+#input has been taken for you
+
+n=int(input())
+
+#find square root of n here
+
+def squareroot(n):
+    l=0
+    r=n
+    while abs(l-r)>10**-5:
+        mid = (l+r)/2
+        if mid**2>n:
+            r=mid
+        else:
+            l=mid  
+    return round(mid,4)
+    
+print('%.4f' % squareroot(n))
+
+
+Rotated List
+def rotated_array(data, key):
+	l=0
+	r=len(data)-1
+	while l<=r:
+		mid – (l+r)//2
+		if data[mid]==key:
+			return mid
+		elif data[l]<=data[mid]:
+			if key>=data[l] and key<data[mid]:
+				r=mid-1
+			else:
+				l=mid+1
+		elif data[l]>data[mid]:
+			if key>data[mid] and key<=data[r]:
+				l=mid+1
+			else:
+				r=mid-1
+	return -1
+		
