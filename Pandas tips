@@ -1,0 +1,29 @@
+Finding local Maxima in a list of values
+Useful for finding peaks or troughs in time series data etc.
+
+1.Easier to do with a data frame
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Generate a noisy AR(1) sample
+np.random.seed(0)
+rs = np.random.randn(200)
+xs = [0]
+for r in rs:
+    xs.append(xs[-1]*0.9 + r)
+df = pd.DataFrame(xs, columns=['data'])
+
+# Find local peaks
+df['min'] = df.data[(df.data.shift(1) > df.data) & (df.data.shift(-1) > df.data)]
+df['max'] = df.data[(df.data.shift(1) < df.data) & (df.data.shift(-1) < df.data)]
+
+# Plot results
+plt.scatter(df.index, df['min'], c='r')
+plt.scatter(df.index, df['max'], c='g')
+df.data.plot()
+
+
+Source :https://stackoverflow.com/questions/48023982/pandas-finding-local-max-and-min
